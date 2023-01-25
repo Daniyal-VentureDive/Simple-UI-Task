@@ -11,6 +11,7 @@ const Button_Component = ({
   placeholder,
   onPress,
   text,
+  size,
 }) => (
   <Button
     textColor={textColor}
@@ -18,6 +19,7 @@ const Button_Component = ({
       borderColor: buttonColor,
       backgroundColor: buttonColor,
       borderWidth: 1,
+      width: size,
     }}
     onPress={onPress}
   >
