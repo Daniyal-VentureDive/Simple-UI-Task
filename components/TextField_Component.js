@@ -13,22 +13,27 @@ const TextField_Component = ({
   label,
   value,
 }) => {
-  const Label = <Text color={cursorColor}>{label}</Text>;
   return (
     <TextInput
-      label={Label}
+      label={label}
       value={value}
       style={{
         ...styles,
         fontSize: 18,
         backgroundColor: fillColor,
       }}
+      underlineColor={cursorColor}
       textColor={cursorColor}
-      cursorColor={cursorColor}
-      activeOutlineColor={cursorColor}
-      activeUnderlineColor={cursorColor}
+      selectionColor={cursorColor}
+      theme={{
+        colors: {
+          placeholder: cursorColor,
+          text: cursorColor,
+          primary: cursorColor,
+          secondary: cursorColor,
+        },
+      }}
       onChangeText={onChangeText}
-      theme={{ colors: { text: cursorColor } }}
     />
   );
 };

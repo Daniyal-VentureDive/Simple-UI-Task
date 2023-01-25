@@ -2,6 +2,11 @@ import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import RootNavigation from "./navigation/RootNavigation";
 
+import { NavigationContainer } from "@react-navigation/native";
 export default function App() {
-  return <RootNavigation />;
+  return (
+    <NavigationContainer>
+      <RootNavigation />
+    </NavigationContainer>
+  );
 }

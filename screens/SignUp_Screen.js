@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TextInput, View } from "react-native";
 import TextField_Component from "../components/TextField_Component";
 import colors from "../theme/colors";
 import FontAwesomeIcons from "react-native-vector-icons/FontAwesome";
@@ -105,6 +105,9 @@ const SignUp_Screen = ({ navigation }) => (
           color: colors.secondaryColor,
           fontSize: 14,
           fontWeight: "bold",
+        }}
+        onPress={() => {
+          navigation.navigate("TaskList");
         }}
       >
         {" "}
