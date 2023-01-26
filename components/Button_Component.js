@@ -1,7 +1,6 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { Button } from "react-native-paper";
-import colors from "../theme/colors";
 
 const Button_Component = ({
   buttonColor,
@@ -12,19 +11,20 @@ const Button_Component = ({
   onPress,
   text,
   size,
-}) => (
-  <Button
-    textColor={textColor}
-    style={{
+}) => {
+  const Styles = StyleSheet.create({
+    button: {
       borderColor: buttonColor,
       backgroundColor: buttonColor,
       borderWidth: 1,
       width: size,
-    }}
-    onPress={onPress}
-  >
-    {text}
-  </Button>
-);
+    },
+  });
+  return (
+    <Button textColor={textColor} style={Styles.button} onPress={onPress}>
+      {text}
+    </Button>
+  );
+};
 
 export default Button_Component;

@@ -1,29 +1,33 @@
 import React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet } from "react-native";
 
-const Badge_Component = ({ color, title }) => (
-  <View
-    style={{
+const Badge_Component = ({ color, title }) => {
+  const styles = StyleSheet.create({
+    container: {
       position: "relative",
       borderWidth: 1,
       borderColor: color,
       borderRadius: 10,
       padding: 5,
-    }}
-  >
-    <Text style={{ fontSize: 15 }}>{title}</Text>
-    <View
-      style={{
-        backgroundColor: color,
-        position: "absolute",
-        height: 10,
-        width: 10,
-        right: -3,
-        top: -4,
-        borderRadius: 50,
-      }}
-    ></View>
-  </View>
-);
+    },
+    title: { fontSize: 15 },
+    dot: {
+      backgroundColor: color,
+      position: "absolute",
+      height: 10,
+      width: 10,
+      right: -3,
+      top: -4,
+      borderRadius: 50,
+    },
+  });
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>{title}</Text>
+      <View style={styles.dot}></View>
+    </View>
+  );
+};
 
 export default Badge_Component;

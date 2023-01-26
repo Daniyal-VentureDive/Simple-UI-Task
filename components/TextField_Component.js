@@ -1,6 +1,5 @@
 import React from "react";
-import { Text, View } from "react-native";
-import colors from "../theme/colors";
+import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 
 const TextField_Component = ({
@@ -13,26 +12,31 @@ const TextField_Component = ({
   label,
   value,
 }) => {
+  const Styles = StyleSheet.create({
+    textInput: {
+      ...styles,
+      fontSize: 18,
+      backgroundColor: fillColor,
+    },
+    theme: {
+      colors: {
+        placeholder: cursorColor,
+        text: cursorColor,
+        primary: cursorColor,
+        secondary: cursorColor,
+      },
+    },
+  });
+
   return (
     <TextInput
       label={label}
       value={value}
-      style={{
-        ...styles,
-        fontSize: 18,
-        backgroundColor: fillColor,
-      }}
+      style={Styles.textInput}
       underlineColor={cursorColor}
       textColor={cursorColor}
       selectionColor={cursorColor}
-      theme={{
-        colors: {
-          placeholder: cursorColor,
-          text: cursorColor,
-          primary: cursorColor,
-          secondary: cursorColor,
-        },
-      }}
+      theme={Styles.theme}
       onChangeText={onChangeText}
     />
   );

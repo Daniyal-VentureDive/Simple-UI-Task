@@ -7,12 +7,40 @@ import colors from "../theme/colors";
 import AntdIcons from "react-native-vector-icons/AntDesign";
 import { useNavigation } from "@react-navigation/native";
 import FontAwesomeIcons from "react-native-vector-icons/FontAwesome";
-import { View } from "react-native";
+import { StyleSheet } from "react-native";
 import NewTask_Screen from "../screens/NewTask_Screen";
 const Stack = createStackNavigator();
 
 const RootNavigation = () => {
   const navigation = useNavigation();
+
+  const styles = StyleSheet.create({
+    tasklist: {
+      headerStyle: {
+        backgroundColor: colors.primaryColor,
+      },
+      headerTintColor: colors.secondaryColor,
+      headerTitleStyle: {
+        fontWeight: "bold",
+        marginLeft: 100,
+      },
+      headerLeft: { marginLeft: 20 },
+      headerRight: { marginRight: 35 },
+    },
+
+    newTask: {
+      headerStyle: {
+        backgroundColor: colors.primaryColor,
+      },
+      headerTintColor: colors.secondaryColor,
+      headerTitleStyle: {
+        fontWeight: "bold",
+        marginLeft: 95,
+      },
+      headerLeft: { marginLeft: 20 },
+      headerRight: { marginRight: 35 },
+    },
+  });
 
   return (
     <Stack.Navigator>
@@ -26,20 +54,15 @@ const RootNavigation = () => {
         name="TaskList"
         options={{
           title: "Tasks",
-          headerStyle: {
-            backgroundColor: colors.primaryColor,
-          },
-          headerTintColor: colors.secondaryColor,
-          headerTitleStyle: {
-            fontWeight: "bold",
-            marginLeft: 100,
-          },
+          headerStyle: styles.tasklist.headerStyle,
+          headerTintColor: styles.tasklist.headerTintColor,
+          headerTitleStyle: styles.tasklist.headerTitleStyle,
           headerLeft: () => (
             <AntdIcons
               color={colors.secondaryColor}
               name="back"
               size={30}
-              style={{ marginLeft: 20 }}
+              style={styles.tasklist.headerLeft}
               onPress={() => {
                 navigation.goBack();
               }}
@@ -51,7 +74,7 @@ const RootNavigation = () => {
               color={colors.secondaryColor}
               name="ellipsis-v"
               size={30}
-              style={{ marginRight: 35 }}
+              style={styles.tasklist.headerRight}
               onPress={() => {
                 navigation.navigate("NewTask");
               }}
@@ -65,20 +88,15 @@ const RootNavigation = () => {
         name="NewTask"
         options={{
           title: "New Task",
-          headerStyle: {
-            backgroundColor: colors.primaryColor,
-          },
-          headerTintColor: colors.secondaryColor,
-          headerTitleStyle: {
-            fontWeight: "bold",
-            marginLeft: 95,
-          },
+          headerStyle: styles.newTask.headerStyle,
+          headerTintColor: styles.newTask.headerTintColor,
+          headerTitleStyle: styles.newTask.headerTitleStyle,
           headerLeft: () => (
             <AntdIcons
               color={colors.secondaryColor}
               name="back"
               size={30}
-              style={{ marginLeft: 20 }}
+              style={styles.newTask.headerLeft}
               onPress={() => {
                 navigation.goBack();
               }}
@@ -90,7 +108,7 @@ const RootNavigation = () => {
               color={colors.secondaryColor}
               name="ellipsis-v"
               size={30}
-              style={{ marginRight: 35 }}
+              style={styles.newTask.headerRight}
               onPress={() => {
                 navigation.navigate("TaskList");
               }}
