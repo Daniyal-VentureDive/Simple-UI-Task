@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextInput, View, Text, StyleSheet } from "react-native";
 import Badge_Component from "../components/Badge_Component";
 import Title_Component from "../components/Title_Component";
 import FontAwesomeIcons from "react-native-vector-icons/FontAwesome";
 import colors from "../theme/colors";
 import Button_Component from "../components/Button_Component";
+import { insertNewTask } from "../database/db";
 
 const NewTask_Screen = ({ navigation }) => {
   const styles = StyleSheet.create({
@@ -66,6 +67,13 @@ const NewTask_Screen = ({ navigation }) => {
     },
   });
 
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [tags, setTags] = useState("");
+  const [member, setMember] = useState("");
+
+  const handleCreateTask = () => {};
+
   return (
     <View style={styles.mainContainer}>
       <View>
@@ -73,20 +81,24 @@ const NewTask_Screen = ({ navigation }) => {
         <TextInput
           style={styles.title_textInput}
           placeholder="Name of the task here"
+          value={name}
+          onChangeText={(text) => {
+            setName(text);
+          }}
         />
       </View>
 
       <View>
         {/* Description */}
         <Title_Component title={"Description"} />
-        <View style={styles.description}>
-          <Text>
-            Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum
-            dolor sit amet, Lorem ipsum dolor sit amet. Lorem ipsum dolor sit
-            amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem
-            ipsum dolor sit amet.
-          </Text>
-        </View>
+        <TextInput
+          style={styles.description}
+          multiline={true}
+          numberOfLines={2}
+          placeholder="Description of the task here"
+          onChangeText={(text) => setDescription(text)}
+          value={description}
+        />
 
         {/* Tags */}
         <View style={styles.tags}>
@@ -133,6 +145,8 @@ const NewTask_Screen = ({ navigation }) => {
         <TextInput
           style={styles.addMember_textInput}
           placeholder="Name of the member here"
+          onChangeText={(text) => setMember(text)}
+          value={member}
         />
       </View>
 

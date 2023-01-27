@@ -126,7 +126,7 @@ const SignUp_Screen = ({ navigation }) => {
       {/* Button  */}
       <View style={styles.buttonContainer}>
         <Button_Component
-          text={"Create Task"}
+          text={"Sign Up"}
           buttonColor={colors.secondaryColor}
           textColor={colors.primaryColor}
           onPress={() => {
