@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
 
-const Badge_Component = ({ color, title }) => {
+const Badge_Component = ({ color, title, tag, setTag }) => {
   const styles = StyleSheet.create({
     container: {
       position: "relative",
@@ -9,6 +9,7 @@ const Badge_Component = ({ color, title }) => {
       borderColor: color,
       borderRadius: 10,
       padding: 5,
+      backgroundColor: tag == title.toLowerCase() ? "lightgray" : "transparent",
     },
     title: { fontSize: 15 },
     dot: {
@@ -23,10 +24,12 @@ const Badge_Component = ({ color, title }) => {
   });
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{title}</Text>
-      <View style={styles.dot}></View>
-    </View>
+    <TouchableOpacity onPress={() => setTag(title.toLowerCase())}>
+      <View style={styles.container}>
+        <Text style={styles.title}>{title}</Text>
+        <View style={styles.dot}></View>
+      </View>
+    </TouchableOpacity>
   );
 };
 

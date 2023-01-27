@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { TextInput, View, Text, StyleSheet } from "react-native";
+import { Alert, TextInput, View, StyleSheet, ScrollView } from "react-native";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+
 import Badge_Component from "../components/Badge_Component";
 import Title_Component from "../components/Title_Component";
 import FontAwesomeIcons from "react-native-vector-icons/FontAwesome";
 import colors from "../theme/colors";
 import Button_Component from "../components/Button_Component";
-import { insertNewTask } from "../database/db";
+import { firebase } from "../config";
 
 const NewTask_Screen = ({ navigation }) => {
+  const taskRef = firebase.firestore().collection("tasks");
   const styles = StyleSheet.create({
     mainContainer: {
       flex: 1,
       paddingHorizontal: 20,
-      justifyContent: "space-around",
     },
 
     title_textInput: {
@@ -65,17 +67,46 @@ const NewTask_Screen = ({ navigation }) => {
       display: "flex",
       alignItems: "center",
     },
+    scrollView: {
+      flex: 1,
+      paddingHorizontal: 20,
+      justifyContent: "space-around",
+    },
   });
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [tags, setTags] = useState("");
+  const [tag, setTag] = useState("");
   const [member, setMember] = useState("");
 
-  const handleCreateTask = () => {};
+  const createNewTasks = async () => {
+    try {
+      if (name != "" && description != "" && tag != "" && member != "") {
+        taskRef.add({
+          name,
+          description,
+          tag,
+          member,
+        });
+
+        setName("");
+        setDescription("");
+        setMember("");
+        setTag("");
+        Alert.alert("Task added successfully!");
+      } else {
+        Alert.alert("Error", "All selections are required");
+      }
+    } catch (error) {
+      Alert.alert("Something went wrong", error.message);
+    }
+  };
 
   return (
-    <View style={styles.mainContainer}>
+    <ScrollView
+      contentContainerStyle={styles.scrollView}
+      //style={styles.mainContainer}
+    >
       <View>
         <Title_Component title={"Task Name"} />
         <TextInput
@@ -104,9 +135,24 @@ const NewTask_Screen = ({ navigation }) => {
         <View style={styles.tags}>
           <Title_Component title={"Tags"} />
           <View style={styles.tagsInnerContainer}>
-            <Badge_Component title={"Personal"} color={"#9978FF"} />
-            <Badge_Component title={"Work"} color={colors.primaryColor} />
-            <Badge_Component title={"Urgent"} color={"red"} />
+            <Badge_Component
+              title={"Personal"}
+              color={"#9978FF"}
+              tag={tag}
+              setTag={setTag}
+            />
+            <Badge_Component
+              title={"Work"}
+              color={colors.primaryColor}
+              tag={tag}
+              setTag={setTag}
+            />
+            <Badge_Component
+              title={"Urgent"}
+              color={"red"}
+              tag={tag}
+              setTag={setTag}
+            />
           </View>
         </View>
       </View>
@@ -156,9 +202,10 @@ const NewTask_Screen = ({ navigation }) => {
           buttonColor={colors.primaryColor}
           textColor={colors.secondaryColor}
           size={120}
+          onPress={createNewTasks}
         />
       </View>
-    </View>
+    </ScrollView>
   );
 };
 

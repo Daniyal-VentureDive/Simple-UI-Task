@@ -1,7 +1,17 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-const Task_Component = ({ color, title, showDot, bg }) => {
+const Task_Component = ({ color, title, showDot, bg, description, tag }) => {
+  const getTagColor = () => {
+    if (tag == "personal") {
+      return "#F0F0F0";
+    } else if (tag == "work") {
+      return "#9979FE";
+    } else {
+      return "#FE0000";
+    }
+  };
+
   const styles = StyleSheet.create({
     mainContainer: {
       display: "flex",
@@ -15,16 +25,16 @@ const Task_Component = ({ color, title, showDot, bg }) => {
       width: 80,
       height: 80,
       borderRadius: 50,
-      backgroundColor: color,
+      backgroundColor: getTagColor(),
     },
     contentBox: { paddingHorizontal: 30, width: "100%", height: "100%" },
     title: {
       fontSize: 19,
-      color: color,
+      color: getTagColor(),
       fontWeight: "400",
     },
     dot: {
-      backgroundColor: color,
+      backgroundColor: getTagColor(),
       position: "absolute",
       width: 12,
       height: 12,
@@ -40,7 +50,7 @@ const Task_Component = ({ color, title, showDot, bg }) => {
     },
 
     underline: {
-      backgroundColor: color,
+      backgroundColor: getTagColor(),
       height: "2%",
       width: "80%",
     },
@@ -52,9 +62,9 @@ const Task_Component = ({ color, title, showDot, bg }) => {
       <View style={styles.contentBox}>
         <View style={styles.innerContainer}>
           <Text style={styles.title}>{title}</Text>
-          {showDot && <View style={styles.dot}></View>}
+          <View style={styles.dot}></View>
         </View>
-        <Text style={styles.notes}>Notes from the tasks</Text>
+        <Text style={styles.notes}>{description}</Text>
         <View style={styles.underline}></View>
       </View>
     </View>
